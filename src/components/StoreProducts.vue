@@ -75,6 +75,12 @@ const deleteProduct = async (productId: number) => {
   }
 }
 
+const confirmDeleteProduct = (productId: number) => {
+  if (confirm("Are you sure you want to delete this product?")) {
+    deleteProduct(productId);
+  }
+}
+
 onMounted(() => {
   fetchProducts();
 });
@@ -86,7 +92,7 @@ onMounted(() => {
     <ul>
       <li v-for="product in products" :key="product.id">
         {{ product.title }} - {{ product.price }}
-        <button @click="deleteProduct(product.id)">Delete</button>
+        <button @click="confirmDeleteProduct(product.id)">Delete</button>
       </li>
     </ul>
     <div v-if="pagination">
