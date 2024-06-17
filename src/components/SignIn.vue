@@ -14,7 +14,7 @@ function onSubmit() {
   const auth = new Auth(remember.value);
   auth.signIn(email.value || '', password.value || '', () => {
     awaiting.value = false;
-    router.push('/');
+    router.push('/stores');
   }, () => {
     awaiting.value = false;
     console.log('Login failed!');
@@ -25,20 +25,27 @@ function onSubmit() {
 <template>
   <div class="login-container flex">
 
-<div class="login-form">
-    <h2>Bem vindo, Lojista!</h2>
-    <form action="#" method="POST">
-        <label for="username">Usuário</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Entrar</button>
-        <p class="signup">Não tem uma conta? <a href="/signinadmin">Solicite uma agora</a></p>
-    </form>
-</div>
+<<div class="login-form">
+      <h2>Login</h2>
+      <form @submit.prevent="onSubmit">
+          <label for="username">E-mail</label>
+          <input v-model="email" id="email" type="email" required>
+
+          <label for="password">Senha</label>
+          <input v-model="password" type="password" id="password" name="password" required>
+
+          <div class="remember">
+            <input v-model="remember" type="checkbox"><br />
+            <label>Lembrar minha senha </label>
+          </div>
+
+          <button type="submit" v-show="!awaiting">Entrar</button>
+          <p class="signup">Não tem uma conta? <a href="/signup">Crie uma agora</a></p>
+      </form>
+    </div>
 
 <div class="login-image">
-  <img src="../../../assets/login-admin1.jpg" alt="Godzilla eating">
+  <img src="../assets/imgs/login-admin1.jpg" alt="Godzilla eating">
 </div>
 
 </div>
