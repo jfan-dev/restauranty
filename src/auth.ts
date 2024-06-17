@@ -20,7 +20,7 @@ class Auth {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "X-API-KEY": "njHJaJmcexJu+fhzy/prX2CAtMk="
+        "X-API-KEY": import.meta.env.VITE_X_API_KEY
       },
       body: JSON.stringify(body),
     });
@@ -46,7 +46,7 @@ class Auth {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "X-API-KEY": "njHJaJmcexJu+fhzy/prX2CAtMk="
+        "X-API-KEY": import.meta.env.VITE_X_API_KEY
       },
       body: JSON.stringify(body),
     });
@@ -70,6 +70,10 @@ class Auth {
     onFailure();
   }
 
+  getToken() {
+    return this.getFallback('token');
+  }
+  
   isLoggedIn() {
     return Boolean(this.getFallback('token'));
   }
