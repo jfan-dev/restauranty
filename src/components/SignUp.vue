@@ -15,7 +15,7 @@ function onSubmit() {
   const auth = new Auth(remember.value);
   auth.signUp(email.value || '', password.value || '', password_confirmation.value || '', () => {
     awaiting.value = false;
-    router.push('/');
+    router.push('/stores');
   }, () => {
     awaiting.value = false;
     console.log('Sign Up failed!');
@@ -25,27 +25,35 @@ function onSubmit() {
 
 <template>
 <div class="register-container flex">
+  
+  <div class="register-image">
+    <img src="../assets/imgs/login-admin2.jpg" alt="Godzilla eating">
+  </div>
+  
+  <div class="register-form">
+        <h2>Crie sua Conta</h2>
 
-<div class="register-form">
-    <h2>Solicite sua conta, lojista!</h2>
-    <p class="note">Após o cadastro nossos atendentes entrarão em contato com você!</p>
-    <form action="#" method="POST">
-        <label for="fullname">Nome Completo</label>
-        <input type="text" id="fullname" name="fullname" required>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-        <label for="phone">Telefone</label>
-        <input type="tel" id="phone" name="phone" required>
-        <label for="address">Cidade</label>
-        <input type="text" id="address" name="address" required>
-        <button type="submit">Cadastrar</button>
-        <p class="login">Já tem uma conta? <a href="/admin">Faça login</a></p>
-    </form>
-</div>
+        <form @submit.prevent="onSubmit">
+                    
+          <label for="email">Email</label>
+          <input v-model="email" type="email" id="email" name="email" required>
 
-<div class="register-image">
-  <img src="../../../assets/login-admin2.jpg" alt="Godzilla eating">
-</div>
+          <label for="password">Senha</label>
+          <input v-model="password" type="password" name="password" required>
+          
+          <label for="password">Confirme a senha</label>
+          <input v-model="password_confirmation" type="password" name="password" required>
+          
+          <div class="remember">
+            <input v-model="remember" type="checkbox"><br />
+            <label>Lembrar minha senha </label>
+          </div>
+
+          <button type="submit" v-show="!awaiting">Cadastrar</button>
+          <p class="login">Já tem uma conta? <a href="/signin">Faça login</a></p>
+      </form>
+    </div>
+
 
 </div>
 
