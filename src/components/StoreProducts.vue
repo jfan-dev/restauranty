@@ -54,6 +54,27 @@ const fetchProducts = async (page: number | null = 1) => {
   }
 };
 
+const deleteProduct = async (productId: number) => {
+  try {
+    const token = auth.getToken();
+    const response = await fetch(`http://localhost:3000/stores/${storeId}/products/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'X-API-KEY': import.meta.env.VITE_X_API_KEY,
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (response.ok) {
+      fetchProducts(pagination.value?.current);
+    } else {
+      console.error('Failed to delete product');
+    }
+  } catch (error) {
+    console.error('Error deleting product:', error);
+  }
+}
+
 onMounted(() => {
   fetchProducts();
 });
@@ -65,6 +86,7 @@ onMounted(() => {
     <ul>
       <li v-for="product in products" :key="product.id">
         {{ product.title }} - {{ product.price }}
+        <button @click="deleteProduct(product.id)">Delete</button>
       </li>
     </ul>
     <div v-if="pagination">
