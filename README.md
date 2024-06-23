@@ -53,6 +53,9 @@ Usuário [ Consumy ](https://github.com/jfan-dev/consumy "Named link title") e V
 ```bash
 # Inicie o servidor de desenvolvimento do Vue
 > npm run dev
+# Email e Senha do usuário seller:
+# orange.curry@example.com
+# 123456
 ```
 
 ## 👑 Demonstração
